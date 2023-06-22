@@ -1,4 +1,4 @@
-# MiUnlockCode iCloud Bypass Signal OpenSourceCode!
+# MiUnlocks iCloud Bypass Signal OpenSourceCode!
 # ...........::::::Open Source By Applecheck.io::::::................
 
 Supported devices : iPhone/iPad/iPod  All iOS & All iDevices Till iPhone X.
@@ -13,7 +13,7 @@ ideviceactivation activate -s http://example.com/activator.php
 
 Credits: https://Applecheck.io/
 
-Telegram: @MiUnlockCode
+Telegram: @MiUnlocks
 
 Join To Our Group For Future Releases: 
 https://t.me/MiUnlockGithub
