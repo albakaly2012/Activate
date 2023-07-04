@@ -15,4 +15,4 @@ ideviceactivation activate -s http://example.com/activator.php
 Telegram: @MeUnlocks
 
 Join To Our Group For Future Releases: 
-https://t.me/MeUnlockGithub
+https://t.me/MMUnlockGit
