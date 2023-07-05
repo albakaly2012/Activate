@@ -1,18 +1,20 @@
-# MeUnlocks iCloud Bypass Signal Open Source Code!
-# ...........::::::Open Source::::::................
+# MoUnlocks iCloud Bypass Signal Open Source Code
 
-Supported devices : iPhone/iPad/iPod  All iOS & All iDevices Till iPhone X.
+Supported devices: iPhone/iPad/iPod (All iOS & All iDevices till iPhone X)
 
-==== instructions ====
+## Instructions
 
-Raptor Path: 'System/Library/PrivateFrameworks/MobileActivation.framework/Support/Certificates/RaptorActivation.pem'
+Raptor Path: `System/Library/PrivateFrameworks/MobileActivation.framework/Support/Certificates/RaptorActivation.pem`
 
+To bypass iCloud activation using the MoUnlocks iCloud Bypass Signal code, run the following command:
 
-ideviceactivation activate -s http://example.com/activator.php 
+ideviceactivation activate -s http://example.com/activator.php
 
+Replace `http://example.com/activator.php` with the URL of the activator script you want to use.
 
+## Community and Support
 
-Telegram: @MeUnlocks
+Telegram: `@MoUnlocks`
 
-Join To Our Group For Future Releases: 
-https://t.me/MMUnlockGit
+Join our group for future releases: [MoUnlocksGITHUB](https://t.me/MoUnlocksGITHUB)
+
