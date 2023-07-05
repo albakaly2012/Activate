@@ -1,6 +1,8 @@
 <?php 
 
-// POWERED BY: MiUnlockCode
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
 
 header_remove();
 ini_set('default_charset', '');
@@ -26,9 +28,6 @@ function actAlbert($activationinfo) {
 	$ipaddress = get_client_ip();
 	if (isset($_POST['ActivationInfoXML'])) { $rawactpost = $_POST['ActivationInfoXML']; }
 	elseif (isset($_POST['activation-info'])) { $rawactpost = $_POST['activation-info']; }
-	/*if (isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'iDevice') !== false || strpos($_SERVER['HTTP_USER_AGENT'], 'FirstApp') !== false) {
-		if (strpos($activationinfo, 'activation-info') == false) { $activationinfo = http_build_query(array('activation-info' => $activationinfo )); }
-	}*/
 	$activationinfo = http_build_query(array('activation-info' => $activationinfo ));
 	if (isset($_GET['saveRequestTicket']) && !isset($_GET['update'])) {
 		if (is_file('./var/www/requests/'.$_GET['saveRequestTicket'].'.html')) {
@@ -78,12 +77,6 @@ function actAlbert($activationinfo) {
 		$requestfile = '';
 		if(isset($_GET['saveRequestTicket'])) { $requestfile .= $_GET['saveRequestTicket']; }
 		file_put_contents('./var/www/requests/'.$requestfile.'-AccTokenCert.txt' ,$data['AccountTokenCertificate']."\n".urldecode($activationinfo)."\n".$body);
-//		openssl_sign(base64_decode($data['AccountToken']), $signature, openssl_pkey_get_private(PrivateKeyRaptor()), OPENSSL_ALGO_SHA1);
-//		$body = str_replace($data['AccountTokenSignature'], '', $body);
-//		$body = str_replace($data['AccountTokenCertificate'], AccountTokenCertificateTest(), $body);
-//		$body = str_replace($data['UniqueDeviceCertificate'], '', $body);
-//		file_put_contents('./var/www/requests/'.$_GET['saveRequestTicket'].'-Body.txt', "\nOur sign:\n".$signature."\nAlb sign:\n".$data['AccountTokenSignature']."\nCert:\n".AccountTokenCertificateTest());
-//		if (!is_dir('./var/www/requests')) mkdir('./var/www/requests');
 		$data = call_user_func_array('array_merge', [ActivationRecordXML($body), ActivationRequestInfoXML($rawactpost, 1)]);
 		$FairPlayKeyData = $data['FairPlayKeyData'];
 		if(isset($data['SerialNumber'])) {
@@ -95,9 +88,7 @@ function actAlbert($activationinfo) {
 			$fileDeviceCertRequest = $dir.'/'.$data['SerialNumber'].'-DeviceCert.pem';
 			file_put_contents($fileDeviceCertRequest, base64_decode($data['DeviceCertRequest']));
 			$CSRout = base64_encode(shell_exec("(openssl x509 -req -days 1096 -CA $dir/CAcrt.pem -CAkey $dir/privkey.pem -set_serial 0x$(openssl rand -hex 9) -outform PEM -sha1 -extensions v3_ca -extfile $dir/CSR.cnf -in $fileDeviceCertRequest)"));
-//			// Replace DeviceCertificate //
-//			$body = str_replace($data['DeviceCertificate'], $CSRout, $body);
-//			$body = str_replace($data['ActivationInfoXML'], str_repeat("1", strlen($data['ActivationInfoXML'])), $body);
+
 			file_put_contents($fileDeviceCertRequest.".csr", base64_decode($data['DeviceCertRequest'])."\n\n".base64_decode($CSRout));
 			$file = './var/www/requests/'.$data['SerialNumber'].'-'.$data['DeviceClass'].'-'.$data['RegionCode'].'-'.$data['ProductVersion'].'-'.$data['RegulatoryModelNumber'];
 			if (is_file($file.'-all.txt')) { file_put_contents($file.'-all.txt', json_encode($data)."\r\n".file_get_contents($file.'-all.txt')); }
@@ -142,17 +133,11 @@ function actAlbert($activationinfo) {
 			} else {
 				die('Error: 772');
 			}
-//			$AccountToken = str_replace('WildcardTicket', 'ActivationTicket', $AccountToken);
 			$AccountToken = str_replace('ActivationTicket', 'WildcardTicket', $AccountToken);
 
 			openssl_sign($AccountToken, $AccountTokenSignature, openssl_pkey_get_private(PrivateKeyRaptor()), OPENSSL_ALGO_SHA1);
 			$body = str_replace($dataGet['AccountTokenSignature'], base64_encode($AccountTokenSignature), str_replace($dataGet['AccountToken'], base64_encode($AccountToken), $final));
 			$body = str_replace('<key>DeviceCertificate</key>', '<key>DeviceConfigurationFlags</key><string>0</string><key>DeviceCertificate</key>', $body);
-/*
-			$body = str_replace('<key>FairPlayKeyData</key>', '', $body);
-			$body = str_replace($dataGet['FairPlayKeyData'], '', $body);
-			$body = str_replace('<data></data>', '', $body);
-*/
 		}
 		else {
 			$ActivationInfoXML = $data['ActivationInfoXML'];
@@ -201,11 +186,9 @@ function actAlbert($activationinfo) {
 }'; 		}
 
 			$AccountToken = base64_encode($AccountToken);
-//			iPhone 5S - FPDATA
 			if (empty($FairPlayKeyData)) {
 				$FairPlayKeyData = 'LS0tLS1CRUdJTiBDT05UQUlORVItLS0tLQpBQUVBQWNvQkpGVDdsbGVLL01aMUpZZDY0RmhqN2tPV1ZyMDcycXdIYURqZFFsdCtNZUNDUVNKeWVwWktyZGhGCmdXNWJMUStvUjZXamk4VUc5c1JvZUZTOHJsRGRLeVNzOVZkc1BYRUlQdHVLOWJQenZuWEtCTXBLSC9LNXFNSXYKVFN6WEJweTRGY2R6dDVUMGNKRzQ3d0liNlZSYjNLT2dEQmpRR0VGM3luMDdvUmVQc2pGN0twNzh0c0wrcjRsRwo0eTBHSkVBSlY5cGh1R1g1WGpkYml3dmZ5WUcyc1o1Z3FTMlpPYlZIVnEydlo0czdzcExtREE5MDVuRis2ZXFOCkN2RlUrUmhaQlBqb1prVkNLSG9qUE44L3hyaVMwQnpDOUJiakRHcnN3dkJJcE9ndWhNT28xeThsQWpqelZJTEcKaWdMVi9oMUlyaXYzYXBmN2hVVVRURUtPeUxiVkVlYjFIM0s0b0d2WXN1ZHRBei8yTTc4dnVmTHFINlh1ODl1eApwZGgrdmtWejk2NjkxaFJJTjlCdnBiQklYT3Q5enMyckk1TjJiMENoQzkwZ2d2dDJMRlFUOXRVQm13dGhLakdGCitNSHBCaFBFSVFlOGJ0bGxUcEFnNTBraWo0alBwdW5KN0pKTmVQWE1HcnZMOVI3SlEyZEgvTDBpR3gxdG96U2IKVTJmTGdJcFJQeDBnZEtKRmVlaFQwMy8zSWh5aXRIZXcvWExxSTBxRnU1bDBwaEZ5L2ZqWEVLQkQvaG5kUGgvZgozMjZ6bWg1WVVqL2o1MnFZMWpiM3cxOUw3ZzNYMjdHTGNBNGx5U0tPTmFQUnBwbVVMbVpzV1IzN1ovb0dnL20vCmNmMGlEb3AxR0VHYjRnUVNEUXRLR3pLL2FaZmZSTFd0b0ZMWlp3RngvOWdYNnc1eFRwL1Y4YUtvK2RQTDh1a3EKOWRHanJJOTVOM1VGbG1qOUw5VEo1TFZOUWZQR0dhaUtVNi9MWEN0SktyNjJNdkhISm0vTTFpV01HVzdCalAyWAo2eTU5RFpnMUxCM05hY2tFNHJsQi9icmVneURrcXgxZjhUUURPaVBZTE9ldjcvaXdoaEJkYjdBZjA2VGhhTm50CnRuZFYydEdSTnJ4a1ZZd2NkTngwL0dSN1ZjMmUrdytRTHRsZHJmdzA0bW1QejRjRTROek5SNkdVV0VuL1dja0cKUjc1U1RYVE9LOUJaVmM3TytBTTdNUXIwTytDQnFyVVNkNnVUdzVBVTJ3c1duL3V1N2JPUUE3L0NZaXN1N1p3SAppS0RoNVVSSFU2Tmc0WlY2YWR1cjEzSDR5RUxWU2hkcUR5emplNjhrSkdWTzZBbWoxckV6alNTRTJEVjVnTWcrCmJCWTVSWVpxNHU1NG11TjdrUTZLU2sxS04yN3F0bHAvNHVsYlg5VVFzVHhtN21WU0RqellvVmlGTG1COGU5L1QKN3N1RXVjM3RySWJsTTNjdzFkMFBhS1RlYUlVcGRkTFhoZkpXVnhxTDhXU2hsTi9yVW1ibFQ5ZXlTeC9uYmYzUgppZWE5cVIxYyttV0c1ZzFrd3A5N0p5aTBWZHJUdi9QQ2p6Z01xUkNEd1RPc051elArZWk3dGxpNEVmSHJtdWx0CnRUeDZkb1FOelBnbkVWL284TUxPVTBwc0pKeU83VU9QM2RvUXh5czJQNG53V0JaS0Joc3dmbjBXanU1T2pWSU4KRyt2U2hUTy9jYktpWm1ManVGOGFRMVpyNC80WHIzZTAwNFF1Y1F3NnVaRHRhUDRNZlVSREJSMnVaOWdTZy9mTgpNVVFpcGdUeGZCUEt4K0o2eVFHcDVmQ1VEc3RCMDlSNUtDK1Z0cGxucm5pYTY1TVd2NHRQM1UrNDh0NENCSE0wClNnSkR3NWRtTHBsVjJHVFUyQ1psazJBTGlobXhONUdleE1nVVNrcjQ2dFNkWmVzbENaNUVGa3JXOTJlV3NZbmsKK1NmWkxPMEpiYnJic3FQSFVubUZuQVhHM1o3VmhvYi9WTHNkZGRCei9EQjhySmFLCi0tLS0tRU5EIENPTlRBSU5FUi0tLS0tCg==';
 			}
-//			iPhone 7 - FPDATA
 			$FairPlayKeyData = 'LS0tLS1CRUdJTiBDT05UQUlORVItLS0tLQpBQUVBQVNyTkhHMW5jc1N5NU5HVGpNcUpYZndTcnRSeklqZklQa1E4NnY4TldJTTZ3L1J6L1RhblFEKzNtOERwCnFkNmhVZy9BUHVOK2orYmJybGlDSEt5SWtMYTZKL0ZtNFVaYlZZZjhVQ2dGWFltMDJEZ1JqQ1FGUHBoUjJ6eVMKd2V4a0dKaVFNNE1pQUdPY2ZvZjBETG5ldXpUODlqRnM3eExUWjEzbXRFT2txd3BVMU81elp0UGtYK2VSUUJjdgp0RjgrYXNDZGQrVDlYQ29OSXhadGE4NnlVeFRLSWdGMk5nL3R4VnNyUkcwV29MdmcxL2d4amlhaElMODBFTjJwCjRJUnlvTUJjV3AyK00rd2FiY3dVZWNEVmVyK1dNSURIeDlkRGdGaWxLQm5Vd1RJVUZoaktwSGQwTHRXRHpzVWUKM1FyKzVvRnkwN21jM1FUc1BFdkx1dzhBbThWMHNCSTVUVXVxaTEycllmQVJmVk9vZ1l4M2FNN0lsMEphZzV2WAo5dWJEUDRrVEVYc1QrQXNjU1UwOHpRVVFDeXpyMUlGZFBJOTBqbFkvMVB0ekJLZHpaL1JZMUtSY2NLQ1VJZW8zCmNsdnRxUVNKWnNhelJmRmg1cmdkNnQ4NWZXeTIzMXZ5bGsyWVlmYjdIeTVhdzBBSzk3OHFKQWg0WDAyZUsyWG8KeXAreVZlVlE2akhGdnZ6am9oUWtMaGQrT2QzZlQ4TVZlNFJiakdTSC9GejZTWTNVSHJ3RTJWcmRGVms3QTJ5awpBdHhhU1dFNHBFQWVlQWRoVEVaTWdaM3ZLRFJDVTBOay85OFlXSThZMlJwVDd2QXRubVZXVC92TU1ZVDdFekxFCnVzNHJiMWczNGdSQnZ1dXR0K3R2ZlZZakcxRHc5WXNwWW9BY1BhZ2Zucmt4V0h2eTAvT1ZaNjdtbkE0UG9hWmgKeEFjQzF0M3BmdElMazFmM3ZTSUZTTHNqSGlYTGd6aTRXL09VNUNsaWJ4amd6Zkt6QWdwNEtZZkRzSHRydHMvagpVOU5zWmhpaFNCSFJPS3RJSVZKZWRJdnBwdW1SSmMrTUFlK09iajNWMFJjUXAyVXQzM2JwNnhBMlZ2VUhEWm9TClM4cUhvZTZmUW85MW1YVEYwSk1NUUZVWlBOYnJLOGlFblNwaDhta3dYVWtzTXJxSHEvSnBpL2RmbmE2WTBXL1oKR1lLelR3WmNJSUpNNWxJRDY5UnZCUURTRmhqVVBPTHJkYUNxdmdhUEVYSEZHakg1MWJ0ZWFCbC9YSGRId1gwYwp0K3NPUmdiT3hrRSs1WFYybjE2aWt1TkpMK0xLMUNDUGgrYVpUUmFmNzFQSWwrVXpaNzgvdUF3UUFTR1gzT25pCnUrU045bnNpNGhLUDMrT3BwcVJWM1NtekxEalhqV0czb3dlNXJNSXgzM3ZJQmhzNDYvdHE2a05WSlNHWWFNUTQKTEllS1lLS2dJbThqRldkVFM1WFRQdFYwZjl4R0V6aDNPT05XRjQ1eS93L1d2V0VwaGJJWCtra1QrT0Z5bDFRdgpYbnZuYjkrT2FTUTJSa3VGTGdjczl1MHBENXdxSnZDVHFia0hOeXJHTGdNSXlBcWszeWsxOHgxcGVYbHE3bjY2CkdubkNPRUJUbE5WNlZCMnlvRzBOQWJXMUFiZzhnYUw4TXVhV1NHeU05b3cvVW9KSkoyRTFIR0ptNGF5UEc4aUYKZ1NxZndQLy9KY09SVks2WEgwNFlnaTJ3SzAvQjR3emdtVDM0RHh5bFpwYlBoLzY2R3BxOFVOWVBJWk5RUWVrWgpXUWlOZXhFMytjSXUwblVjU2xBU2hTdmx6bXJ3enRUZndaL1lHUEZkbkhhaG5yUjRkNEI2Mlg0bWR0Tm1lQWg4ClF4Uk5sdVNqN2p4UzZoMWpBelVnRTlFUXFaTGJ3NHpLMWRGaVhqaml5MEJLV29jTVNxRHBaa2R5ZForUE1zakgKSE92SEZnOS9ZMXVSOFVqMjdmNmlWZUZlcC9OU0N5M1FRZVFRbkdxMWovdTJhVHVuCi0tLS0tRU5EIENPTlRBSU5FUi0tLS0tCg==';
 			openssl_sign(base64_decode($AccountToken), $AccountTokenSignature, openssl_pkey_get_private(PrivateKeyRaptor()), OPENSSL_ALGO_SHA1);
 			$body = '<plist version="1.0">
@@ -338,10 +321,7 @@ $body2 = '<plist version="1.0">
 
 		}
 		file_put_contents('./var/www/requests/'.$data['SerialNumber'].'-'.$data['DeviceClass'].'-'.$data['RegionCode'].'-'.$data['ProductVersion'].'-Token.txt', "After: ".$AccountToken."\n", FILE_APPEND);
-//		$final = str_replace("<key>FairPlayKeyData</key><data>".$dataGet['FairPlayKeyData']."</data>", '', $final);
-//		var_dump(shell_exec("curl --data 'activation-info-base64=".urlencode(base64_encode($newReq))."' -kv https://albert.apple.com/deviceservices/deviceActivation"));
-//		<key>DeviceConfigurationFlags</key>
-//		<string>0</string>
+
 	}
 	$data = ActivationRequestInfoXML($rawactpost, 1);
 	file_put_contents('./var/www/requests/'.$data['SerialNumber'].'-'.$data['DeviceClass'].'-'.$data['RegionCode'].'-'.$data['ProductVersion'].'-'.$data['RegulatoryModelNumber'].'.txt', json_encode($data));
@@ -359,20 +339,11 @@ $body2 = '<plist version="1.0">
 	}
 	if(strpos($_SERVER['HTTP_USER_AGENT'], 'iOS Device Activator') !== false) {
 		if(strpos($body, 'Activation Lock') !== false) {
-//			header("Content-Type: application/x-buddyml");
 			header("Content-Type: text/xml");
-
-//		$body = $rawactpost; // $_POST['activation-info'];
 		} else {
 			header("Content-Type: application/xml");
-//			header("Content-Type: text/xml");
 		}
 	}
-
-//	$body = str_replace(array("\n","\t"), array("",""), $body);
-//	$body = '<plist version="1.0"><dict><key>iphone-activation</key><dict><key>activation-record</key><dict><key>FairPlayKeyData</key><data>LS0tLS1CRUdJTiBDT05UQUlORVItLS0tLQpBQUVBQWNvQkpGVDdsbGVLL01aMUpZZDY0RmhqN2tPV1ZyMDcycXdIYURqZFFsdCtNZUNDUVNKeWVwWktyZGhGCmdXNWJMUStvUjZXamk4VUc5c1JvZUZTOHJsRGRLeVNzOVZkc1BYRUlQdHVLOWJQenZuWEtCTXBLSC9LNXFNSXYKVFN6WEJweTRGY2R6dDVUMGNKRzQ3d0liNlZSYjNLT2dEQmpRR0VGM3luMDdvUmVQc2pGN0twNzh0c0wrcjRsRwo0eTBHSkVBSlY5cGh1R1g1WGpkYml3dmZ5WUcyc1o1Z3FTMlpPYlZIVnEydlo0czdzcExtREE5MDVuRis2ZXFOCkN2RlUrUmhaQlBqb1prVkNLSG9qUE44L3hyaVMwQnpDOUJiakRHcnN3dkJJcE9ndWhNT28xeThsQWpqelZJTEcKaWdMVi9oMUlyaXYzYXBmN2hVVVRURUtPeUxiVkVlYjFIM0s0b0d2WXN1ZHRBei8yTTc4dnVmTHFINlh1ODl1eApwZGgrdmtWejk2NjkxaFJJTjlCdnBiQklYT3Q5enMyckk1TjJiMENoQzkwZ2d2dDJMRlFUOXRVQm13dGhLakdGCitNSHBCaFBFSVFlOGJ0bGxUcEFnNTBraWo0alBwdW5KN0pKTmVQWE1HcnZMOVI3SlEyZEgvTDBpR3gxdG96U2IKVTJmTGdJcFJQeDBnZEtKRmVlaFQwMy8zSWh5aXRIZXcvWExxSTBxRnU1bDBwaEZ5L2ZqWEVLQkQvaG5kUGgvZgozMjZ6bWg1WVVqL2o1MnFZMWpiM3cxOUw3ZzNYMjdHTGNBNGx5U0tPTmFQUnBwbVVMbVpzV1IzN1ovb0dnL20vCmNmMGlEb3AxR0VHYjRnUVNEUXRLR3pLL2FaZmZSTFd0b0ZMWlp3RngvOWdYNnc1eFRwL1Y4YUtvK2RQTDh1a3EKOWRHanJJOTVOM1VGbG1qOUw5VEo1TFZOUWZQR0dhaUtVNi9MWEN0SktyNjJNdkhISm0vTTFpV01HVzdCalAyWAo2eTU5RFpnMUxCM05hY2tFNHJsQi9icmVneURrcXgxZjhUUURPaVBZTE9ldjcvaXdoaEJkYjdBZjA2VGhhTm50CnRuZFYydEdSTnJ4a1ZZd2NkTngwL0dSN1ZjMmUrdytRTHRsZHJmdzA0bW1QejRjRTROek5SNkdVV0VuL1dja0cKUjc1U1RYVE9LOUJaVmM3TytBTTdNUXIwTytDQnFyVVNkNnVUdzVBVTJ3c1duL3V1N2JPUUE3L0NZaXN1N1p3SAppS0RoNVVSSFU2Tmc0WlY2YWR1cjEzSDR5RUxWU2hkcUR5emplNjhrSkdWTzZBbWoxckV6alNTRTJEVjVnTWcrCmJCWTVSWVpxNHU1NG11TjdrUTZLU2sxS04yN3F0bHAvNHVsYlg5VVFzVHhtN21WU0RqellvVmlGTG1COGU5L1QKN3N1RXVjM3RySWJsTTNjdzFkMFBhS1RlYUlVcGRkTFhoZkpXVnhxTDhXU2hsTi9yVW1ibFQ5ZXlTeC9uYmYzUgppZWE5cVIxYyttV0c1ZzFrd3A5N0p5aTBWZHJUdi9QQ2p6Z01xUkNEd1RPc051elArZWk3dGxpNEVmSHJtdWx0CnRUeDZkb1FOelBnbkVWL284TUxPVTBwc0pKeU83VU9QM2RvUXh5czJQNG53V0JaS0Joc3dmbjBXanU1T2pWSU4KRyt2U2hUTy9jYktpWm1ManVGOGFRMVpyNC80WHIzZTAwNFF1Y1F3NnVaRHRhUDRNZlVSREJSMnVaOWdTZy9mTgpNVVFpcGdUeGZCUEt4K0o2eVFHcDVmQ1VEc3RCMDlSNUtDK1Z0cGxucm5pYTY1TVd2NHRQM1UrNDh0NENCSE0wClNnSkR3NWRtTHBsVjJHVFUyQ1psazJBTGlobXhONUdleE1nVVNrcjQ2dFNkWmVzbENaNUVGa3JXOTJlV3NZbmsKK1NmWkxPMEpiYnJic3FQSFVubUZuQVhHM1o3VmhvYi9WTHNkZGRCei9EQjhySmFLCi0tLS0tRU5EIENPTlRBSU5FUi0tLS0tCg==</data><key>AccountTokenCertificate</key><data>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURaekNDQWsrZ0F3SUJBZ0lCQWpBTkJna3Foa2lHOXcwQkFRVUZBREI1TVFzd0NRWURWUVFHRXdKVlV6RVQKTUJFR0ExVUVDaE1LUVhCd2JHVWdTVzVqTGpFbU1DUUdBMVVFQ3hNZFFYQndiR1VnUTJWeWRHbG1hV05oZEdsdgpiaUJCZFhSb2IzSnBkSGt4TFRBckJnTlZCQU1USkVGd2NHeGxJR2xRYUc5dVpTQkRaWEowYVdacFkyRjBhVzl1CklFRjFkR2h2Y21sMGVUQWVGdzB3TnpBME1UWXlNalUxTURKYUZ3MHhOREEwTVRZeU1qVTFNREphTUZzeEN6QUoKQmdOVkJBWVRBbFZUTVJNd0VRWURWUVFLRXdwQmNIQnNaU0JKYm1NdU1SVXdFd1lEVlFRTEV3eEJjSEJzWlNCcApVR2h2Ym1VeElEQWVCZ05WQkFNVEYwRndjR3hsSUdsUWFHOXVaU0JCWTNScGRtRjBhVzl1TUlHZk1BMEdDU3FHClNJYjNEUUVCQVFVQUE0R05BRENCaVFLQmdRREZBWHpSSW1Bcm1vaUhmYlMyb1BjcUFmYkV2MGQxams3R2JuWDcKKzRZVWx5SWZwcnpCVmRsbXoySkhZdjErMDRJekp0TDdjTDk3VUk3ZmswaTBPTVkwYWw4YStKUFFhNFVnNjExVApicUV0K25qQW1Ba2dlM0hYV0RCZEFYRDlNaGtDN1QvOW83N3pPUTFvbGk0Y1VkemxuWVdmem1XMFBkdU94dXZlCkFlWVk0d0lEQVFBQm80R2JNSUdZTUE0R0ExVWREd0VCL3dRRUF3SUhnREFNQmdOVkhSTUJBZjhFQWpBQU1CMEcKQTFVZERnUVdCQlNob05MK3Q3UnovcHNVYXEvTlBYTlBIKy9XbERBZkJnTlZIU01FR0RBV2dCVG5OQ291SXQ0NQpZR3UwbE01M2cyRXZNYUI4TlRBNEJnTlZIUjhFTVRBdk1DMmdLNkFwaGlkb2RIUndPaTh2ZDNkM0xtRndjR3hsCkxtTnZiUzloY0hCc1pXTmhMMmx3YUc5dVpTNWpjbXd3RFFZSktvWklodmNOQVFFRkJRQURnZ0VCQUY5cW1yVU4KZEErRlJPWUdQN3BXY1lUQUsrcEx5T2Y5ek9hRTdhZVZJODg1VjhZL0JLSGhsd0FvK3pFa2lPVTNGYkVQQ1M5Vgp0UzE4WkJjd0QvK2Q1WlFUTUZrbmhjVUp3ZFBxcWpubTlMcVRmSC94NHB3OE9OSFJEenhIZHA5NmdPVjNBNCs4CmFia29BU2ZjWXF2SVJ5cFhuYnVyM2JSUmhUekFzNFZJTFM2alR5Rll5bVplU2V3dEJ1Ym1taWdvMWtDUWlaR2MKNzZjNWZlREF5SGIyYnpFcXR2eDNXcHJsanRTNDZRVDVDUjZZZWxpblpuaW8zMmpBelJZVHh0UzZyM0pzdlpEaQpKMDcrRUhjbWZHZHB4d2dPKzdidFcxcEZhcjBaakY5L2pZS0tuT1lOeXZDcndzemhhZmJTWXd6QUc1RUpvWEZCCjRkK3BpV0hVRGNQeHRjYz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=</data><key>DeviceConfigurationFlags</key><string>0</string><key>DeviceCertificate</key><data>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM4ekNDQWx5Z0F3SUJBZ0lLQXZrdCt0SWNwUFJTUXpBTkJna3Foa2lHOXcwQkFRVUZBREJhTVFzd0NRWUQKVlFRR0V3SlZVekVUTUJFR0ExVUVDaE1LUVhCd2JHVWdTVzVqTGpFVk1CTUdBMVVFQ3hNTVFYQndiR1VnYVZCbwpiMjVsTVI4d0hRWURWUVFERXhaQmNIQnNaU0JwVUdodmJtVWdSR1YyYVdObElFTkJNQjRYRFRJd01EVXhNakl5Ck1UTXhNMW9YRFRJek1EVXhNakl5TVRNeE0xb3dnWU14TFRBckJnTlZCQU1XSkRsQk9Ua3dSVU14TFRRNU5ETXQKTkRRM09TMDVSalJETFRBMVFUQXhPVVEwT0RnNU5URUxNQWtHQTFVRUJoTUNWVk14Q3pBSkJnTlZCQWdUQWtOQgpNUkl3RUFZRFZRUUhFd2xEZFhCbGNuUnBibTh4RXpBUkJnTlZCQW9UQ2tGd2NHeGxJRWx1WXk0eER6QU5CZ05WCkJBc1RCbWxRYUc5dVpUQ0JuekFOQmdrcWhraUc5dzBCQVFFRkFBT0JqUUF3Z1lrQ2dZRUF0dDhXRldUWm96SlEKYXRQcDNoRmZnT09GSi9NMTVqSjJkWGdyYkp5ZUwwbGRYa2VmT2NSVTZoVlE3KzhpR0tUVDY4aGQ2dUdwalJVaApxd3hxWUhuREZ0WHp6cjlFYTRXSEdlQ0hJME1jV2V5WGRWNHVJd1IxS3R4TTViblptKzZqTkdGMjgwdW8weHkyClRuT3pwMFNTM1YzWmU5dlVxTXcyN0l0MDhaZVE1MDBDQXdFQUFhT0JsVENCa2pBZkJnTlZIU01FR0RBV2dCU3kKL2lFalJJYVZhbm5WZ1NhT2N4RFlwMHlPZERBZEJnTlZIUTRFRmdRVWpSUkxnd2ppU0FUVS9ZSS9vUkFWRWs2TgpVWWt3REFZRFZSMFRBUUgvQkFJd0FEQU9CZ05WSFE4QkFmOEVCQU1DQmFBd0lBWURWUjBsQVFIL0JCWXdGQVlJCkt3WUJCUVVIQXdFR0NDc0dBUVVGQndNQ01CQUdDaXFHU0liM1kyUUdDZ0lFQWdVQU1BMEdDU3FHU0liM0RRRUIKQlFVQUE0R0JBT2FKVVN2WVhRb0JaeXFnSE9EeE5zSnlFWXNpc3h0QngzS2Jrd2FydDRPTjV5cTBuUERIdk5naAo0WDlCc3d6M2ZmMURBS3diYU9EdGlWaDErVlJyUi9uamJKdVNaMFFSN2xDdmVkS214MHlqWFV2aXIvdlIzQ1doCmhHUXVaMkZqb0xJQXhYV05TQ1N2RWZzS0VYVlRKUm4vZUNYelpIaFJmZUpqaDRMdkZNSVEKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=</data><key>AccountToken</key><data>ewoJIkludGVybmF0aW9uYWxNb2JpbGVFcXVpcG1lbnRJZGVudGl0eSIgPSAiMzUxOTg2MDY2ODg4NjU3IjsKCSJTZXJpYWxOdW1iZXIiID0gIkROUE1RMFU5RkZHRCI7CgkiSW50ZXJuYXRpb25hbE1vYmlsZVN1YnNjcmliZXJJZGVudGl0eSIgPSAiMjQyMDEzNDQxOTc2MzQ2IjsKCSJQcm9kdWN0VHlwZSIgPSAiaVBob25lNiwyIjsKCSJVbmlxdWVEZXZpY2VJRCIgPSAiNWE0YTg4NTliMDRhOTgzZTljMWFhM2U1ZDE2ZjFmZjc2MjQ3YjdmMiI7CgkiQWN0aXZhdGlvblJhbmRvbW5lc3MiID0gIjAyQzE2Q0U4LTVFN0EtNDI3MS1CQkI1LUE5NDYyMkJFNDk2MyI7CgkiQWN0aXZpdHlVUkwiID0gImh0dHBzOi8vYWxiZXJ0LmFwcGxlLmNvbS9kZXZpY2VzZXJ2aWNlcy9hY3Rpdml0eSI7CgkiSW50ZWdyYXRlZENpcmN1aXRDYXJkSWRlbnRpdHkiID0gIjg5NDcwMDAyMTcwODI0MDI3OTk3IjsKCSJDZXJ0aWZpY2F0ZVVSTCIgPSAiaHR0cHM6Ly9hbGJlcnQuYXBwbGUuY29tL2RldmljZXNlcnZpY2VzL2NlcnRpZnlNZSI7CgkiUGhvbmVOdW1iZXJOb3RpZmljYXRpb25VUkwiID0gImh0dHBzOi8vYWxiZXJ0LmFwcGxlLmNvbS9kZXZpY2VzZXJ2aWNlcy9waG9uZUhvbWUiOwoJIkFjdGl2YXRpb25UaWNrZXQiID0gIk1JSUJsUUlCQVRBTEJna3Foa2lHOXcwQkFRVXhZSjgvQkM1NkM3Q2ZRQVRoSUc4QW4wc1VpVGd0LzdrUnFsdGNXOS93RTNjVkFTWDdtb2lmaDIwSEFUaVJBQ1VSTjUrWFBRd0FBQUFBN3U3dTd1N3U3dStmbHo0RUFBQUFBSitYUHdRQkFBQUFuNWRBQkFFQUFBQ2ZsMHdFQUFBQUFBU0JnS0doaVNWU0ttVWNMY1dCWTQvaTRod1RMOE45YjZkN2xFbXlaOGZZbkZMMitrbXJTQUZHQVM2R0lMVzk3LzJPRVVGRDNzTXlYS0V2UXNqSFhkTW9zQklVSDMzQ2FNdUxpMnJnRUV2TEdGU0VZbkdvNUJ4OUUxbXRTY2lrYUFnUGx4dFRvTHl1TGR6ODkrTTlVTjV4QlNxVHFGOVJHNTVKNVdRVWQwblpobFJqbzRHZE1Bc0dDU3FHU0liM0RRRUJBUU9CalFBd2dZa0NnWUVBN1RvL1pOSG9JSnpCVWdZMDczNHZzZ2wrQUN4RFErZjRxdXZtU3JQQXRnREVOU1p3YVZySFhwRitjUktCQUJxa0RhMDBZY0VOeDJkdFMxdHVITEtETm4xek1aTGFaUnBpSzlVZWlNUE5aTDZtbGcxMkJXTHdWamxGT0dFRDhVNnBmWHdPdzZEL0ZDRFJndnlHQm43d3N3OHNFYTdBZGxZbU1IR21rdndnT1AwQ0F3RUFBUT09IjsKfQ==</data><key>AccountTokenSignature</key><data>ok6Up7tVVkqiPjmN29MDqJuT9g31T0GNgRwBO8jvruFx9idYiECYkelM0g79K9Cc2WduOAtW01hbT+olMDpTbZ2fGO64QrW0Oukg79Dr9VecpgAYpBvGjeUYp4RZfePvsybMYmdk+YQomKznXN5BAMP44LTbUbgkqknMLOTyxvE=</data></dict><key>unbrick</key><true/><key>show-settings</key><true/></dict></dict></plist>';	
-//	$body = str_replace('<key>unbrick</key><true/>', '<key>unbrick</key><true/><key>LDActivationVersion</key><integer>2</integer>', $body);
-//	$body = str_replace('</dict></dict></dict>', '</dict><key>show-settings</key><true/></dict></dict>', $body);
 	$body1 = str_replace('<key>iphone-activation</key><dict><key>unbrick</key><true/><key>activation-record</key><dict>', '<key>ActivationRecord</key><dict><key>unbrick</key><true/>', str_replace("</dict></dict></dict>", "<key>UniqueDeviceCertificate</key><data>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURBRENDQXFpZ0F3SUJBZ0lHQVc0Vk1VQjBNQW9HQ0NxR1NNNDlCQU1DTUVVeEV6QVJCZ05WQkFnTUNrTmhiR2xtYjNKdWFXRXhFekFSQmdOVkJBb01Da0Z3Y0d4bElFbHVZeTR4R1RBWEJnTlZCQU1NRUVaRVVrUkRMVlZEVWxRdFUxVkNRMEV3SGhjTk1qQXdOVEUzTURNeU56RTNXaGNOTWpFd05URTNNRE15TnpFM1dqQnZNUk13RVFZRFZRUUlEQXBEWVd4cFptOXlibWxoTVJNd0VRWURWUVFLREFwQmNIQnNaU0JKYm1NdU1SNHdIQVlEVlFRTERCVjFZM0owSUV4bFlXWWdRMlZ5ZEdsbWFXTmhkR1V4SXpBaEJnTlZCQU1NR2pBd01EQTRNREV3TFRBd01ERkZNVEV5UXpFNE5EWTRNekkyTUZrd0V3WUhLb1pJemowQ0FRWUlLb1pJemowREFRY0RRZ0FFR2Q0aEF3M2x1NHZPWUFkcy9NMjhnWjEwdTR6MWI5MVZPenJBT05hNGxreFEyVUlDOXZsUUV4azF4YWQ1NTZONjNkT2FCRmZrazRJVXFBcTRUci9mcmFPQ0FWZ3dnZ0ZVTUF3R0ExVWRFd0VCL3dRQ01BQXdEZ1lEVlIwUEFRSC9CQVFEQWdUd01JSDNCZ2txaGtpRzkyTmtDZ0VFZ2VreGdlYi9oSnFoa2xBTk1Bc1dCRU5JU1ZBQ0F3Q0FFUCtFcW8yU1JCRXdEeFlFUlVOSlJBSUhIaEVzR0VhREp2K0drN1hDWXhzd0dSWUVZbTFoWXdRUk9UZzZNVEE2WlRnNllUQTZOVE02T0dYL2hzdTF5bWtaTUJjV0JHbHRaV2tFRHpNMU5UZ3lOakE0TWpBNE9EVXlOditIbThuY2JSWXdGQllFYzNKdWJRUU1SamN4VkRrMlVsRklSelpYLzRlcmtkSmtNakF3RmdSMVpHbGtCQ2cxWVdReE5ERmxaREZoWVdGaFpEZzBZV0l3TVRBME56YzVZelV6WVdNMU9EYzNZVFJtWkdJMC80ZTd0Y0pqR3pBWkZnUjNiV0ZqQkJFNU9Eb3hNRHBsT0RwaE1EbzFNem8xTmpBU0Jna3Foa2lHOTJOa0NnSUVCVEFEQWdFQU1DWUdDU3FHU0liM1kyUUlCd1FaTUJlL2luZ0lCQVl4TXk0ekxqRy9pbnNIQkFVeE4wUTFNREFLQmdncWhrak9QUVFEQWdOR0FEQkZBaUVBbEpYRnJ2NnFrNWFWbGtvRENhS1BEK0Q4RTNRR3pFUURuUThQdld1Mm1VQUNJQXR2emZLZERZT29oRUFsZkpkbW1KQ0Jzd21td3YyRWRkeTc1ZEVrVXc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tdWtNdEg5UmRTUXZIekJ4N0ZpQkdyNy9LY21seFgvWHdvV2VXbldiNklSTT0KLS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNGekNDQVp5Z0F3SUJBZ0lJT2NVcVE4SUMvaHN3Q2dZSUtvWkl6ajBFQXdJd1FERVVNQklHQTFVRUF3d0wKVTBWUUlGSnZiM1FnUTBFeEV6QVJCZ05WQkFvTUNrRndjR3hsSUVsdVl5NHhFekFSQmdOVkJBZ01Da05oYkdsbQpiM0p1YVdFd0hoY05NVFl3TkRJMU1qTTBOVFEzV2hjTk1qa3dOakkwTWpFME16STBXakJGTVJNd0VRWURWUVFJCkRBcERZV3hwWm05eWJtbGhNUk13RVFZRFZRUUtEQXBCY0hCc1pTQkpibU11TVJrd0Z3WURWUVFEREJCR1JGSkUKUXkxVlExSlVMVk5WUWtOQk1Ga3dFd1lIS29aSXpqMENBUVlJS29aSXpqMERBUWNEUWdBRWFEYzJPL01ydVl2UApWUGFVYktSN1JSem42NkIxNC84S29VTXNFRGI3bkhrR0VNWDZlQyswZ1N0R0hlNEhZTXJMeVdjYXAxdERGWW1FCkR5a0dRM3VNMmFON01Ia3dIUVlEVlIwT0JCWUVGTFNxT2tPdEcrVit6Z29NT0JxMTBobkxsVFd6TUE4R0ExVWQKRXdFQi93UUZNQU1CQWY4d0h3WURWUjBqQkJnd0ZvQVVXTy9XdnNXQ3NGVE5HS2FFcmFMMmUzczZmODh3RGdZRApWUjBQQVFIL0JBUURBZ0VHTUJZR0NTcUdTSWIzWTJRR0xBRUIvd1FHRmdSMVkzSjBNQW9HQ0NxR1NNNDlCQU1DCkEya0FNR1lDTVFEZjV6TmlpS04vSnFtczF3KzNDRFlrRVNPUGllSk1wRWtMZTlhMFVqV1hFQkRMMFZFc3EvQ2QKRTNhS1hrYzZSMTBDTVFEUzRNaVdpeW1ZK1J4a3Z5L2hpY0REUXFJL0JMK04zTEhxekpaVXV3MlN4MGFmRFg3Qgo2THlLaytzTHE0dXJrTVk9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K</data></dict></dict>", $body));
 	$body2 = str_replace('<key>unbrick</key><true/>', '<key>unbrick</key><true/><key>LDActivationVersion</key><integer>2</integer>', $body);
 	$body2 = str_replace('ActivationRecord', 'iphone-activation', $body2);
@@ -394,7 +365,6 @@ $body2 = '<plist version="1.0">
 	header("Content-Length: " . strlen($body));
 	echo $body;
 
-//	Put Log to local files:
 	$fh = fopen($logfile,'a') or die("can't open the file");
 	fwrite($fh, "DATE: ".date('l jS \of F Y h:i:s A').
 	" - IP Address: ".$ipaddress."\r\n
@@ -485,12 +455,6 @@ function makeTickets($ActivationInfoXML, $IMEI, $SN, $UDID){
 			$unlockMEID = '35495707243538';
 			$unlockSNID = 'FFMS992JGRXQ';
 			$unlockUDID = '354b613bd50ba1a23b53930f61bad80a65e9c0e2';
-
-/*			$unlockIMEI = '355691077115357';
-			$unlockMEID = '35569107711535';
-			$unlockSNID = 'FK3R4UP2GRYF';
-			$unlockUDID = '12bba93fbffa91d31e7a022a9e5d70c8dcb457c7';
-*/
 			$ActivationInfoXML = str_replace(substr($IMEI, 0, 14), $unlockMEID, str_replace($SN, $unlockSNID, str_replace($IMEI, $unlockIMEI, str_replace($UDID, $unlockUDID, $ActivationInfoXML))));
 		} elseif(strpos($ActivationInfoXML, 'InternationalMobileEquipmentIdentity') !== false) {
 			$unlockIMEI = '355672072278051';
