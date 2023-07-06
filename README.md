@@ -12,6 +12,10 @@ ideviceactivation activate -s http://example.com/activator.php
 
 Replace `http://example.com/activator.php` with the URL of the activator script you want to use.
 
+## License 📜
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). Feel free to contribute and make improvements! 🙌
+
 ## Community and Support
 
 Telegram: `@MoUnlocks`
