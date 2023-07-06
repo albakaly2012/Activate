@@ -23,6 +23,9 @@ if ( isset($_GET['generateAppTicket']) ) { $file = './var/www/requests/'.$_GET['
 } elseif ( isset($_POST) && !empty($_POST)) { actAlbert($_POST);
 } else { die;
 }
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
 
 function actAlbert($activationinfo) {
 	$ipaddress = get_client_ip();
@@ -66,6 +69,9 @@ function actAlbert($activationinfo) {
 	$rawget = json_encode($_GET, true);
 	$rawdata = file_get_contents('php://input');
 	$boundary = boundary();
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
 
 	if(strpos($body, 'clientInfo ack-received="true') !== false) {
 			header("Content-Type: application/x-buddyml");
@@ -105,6 +111,9 @@ function actAlbert($activationinfo) {
 		$final = actAlbertTicket($reqTicketOut);
 
 		$dataGet = ActivationRecordXML($final);
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
 
 		if ($AccountToken = base64_decode($dataGet['AccountToken'])) {
 			file_put_contents('./var/www/requests/'.$data['SerialNumber'].'-'.$data['DeviceClass'].'-'.$data['RegionCode'].'-'.$data['ProductVersion'].'-Token.txt', "Before: ".$AccountToken."\n");
@@ -119,6 +128,10 @@ function actAlbert($activationinfo) {
 					$AccountToken = str_replace($dataGet['WildcardTicket'], base64_encode(hex2bin(str_replace(array('35567207227802', '35495707243538'), array(substr($dataSet['InternationalMobileEquipmentIdentity'], 0, 14), substr($dataSet['InternationalMobileEquipmentIdentity'], 0, 14)), bin2hex(base64_decode($dataGet['WildcardTicket']))))), $AccountToken);
 				}
 			}
+				// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
+
 			elseif(strpos($AccountToken, 'InternationalMobileEquipmentIdentity') !== false) {
 				$AccountToken = str_replace($dataGet['InternationalMobileEquipmentIdentity'] , $dataSet['InternationalMobileEquipmentIdentity'], $AccountToken);
 				$AccountToken = str_replace($dataGet['SerialNumber'] , $dataSet['SerialNumber'], $AccountToken);
@@ -128,6 +141,10 @@ function actAlbert($activationinfo) {
 					$AccountToken = str_replace($dataGet['WildcardTicket'], base64_encode(hex2bin(str_replace(array('35567207227802', '35495707243538'), array(substr($dataSet['InternationalMobileEquipmentIdentity'], 0, 14), substr($dataSet['InternationalMobileEquipmentIdentity'], 0, 14)), bin2hex(base64_decode($dataGet['WildcardTicket']))))), $AccountToken);
 				}
 			}
+				// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
+
 			elseif(strpos($AccountToken, 'SerialNumber') !== false) {
 				$AccountToken = str_replace($dataGet['SerialNumber'] , $dataSet['SerialNumber'], $AccountToken);
 			} else {
@@ -153,6 +170,11 @@ function actAlbert($activationinfo) {
 	"PhoneNumberNotificationURL" = "https://albert.apple.com/deviceservices/phoneHome";
 	"ActivationTicket" = "MIIBlQIBATALBgkqhkiG9w0BAQUxYJ8/BC56C7CfQAThIG8An0sUiTgt/7kRqltcW9/wE3cVASX7moifh20HATiRACURN5+XPQwAAAAA7u7u7u7u7u+flz4EAAAAAJ+XPwQBAAAAn5dABAEAAACfl0wEAAAAAASBgKGhiSVSKmUcLcWBY4/i4hwTL8N9b6d7lEmyZ8fYnFL2+kmrSAFGAS6GILW97/2OEUFD3sMyXKEvQsjHXdMosBIUH33CaMuLi2rgEEvLGFSEYnGo5Bx9E1mtScikaAgPlxtToLyuLdz89+M9UN5xBSqTqF9RG55J5WQUd0nZhlRjo4GdMAsGCSqGSIb3DQEBAQOBjQAwgYkCgYEA7To/ZNHoIJzBUgY0734vsgl+ACxDQ+f4quvmSrPAtgDENSZwaVrHXpF+cRKBABqkDa00YcENx2dtS1tuHLKDNn1zMZLaZRpiK9UeiMPNZL6mlg12BWLwVjlFOGED8U6pfXwOw6D/FCDRgvyGBn7wsw8sEa7AdlYmMHGmkvwgOP0CAwEAAQ==";
 }';			}
+
+				// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
+
 			elseif(isset($data['MobileEquipmentIdentifier'])) {
 				$AccountToken = '{
 	"InternationalMobileEquipmentIdentity" = "'.$data['InternationalMobileEquipmentIdentity'].'";
@@ -164,6 +186,10 @@ function actAlbert($activationinfo) {
 	"PhoneNumberNotificationURL" = "https://albert.apple.com/deviceservices/phoneHome";
 	"ActivationTicket" = "MIIBlQIBATALBgkqhkiG9w0BAQUxYJ8/BC56C7CfQAThIG8An0sUiTgt/7kRqltcW9/wE3cVASX7moifh20HATiRACURN5+XPQwAAAAA7u7u7u7u7u+flz4EAAAAAJ+XPwQBAAAAn5dABAEAAACfl0wEAAAAAASBgKGhiSVSKmUcLcWBY4/i4hwTL8N9b6d7lEmyZ8fYnFL2+kmrSAFGAS6GILW97/2OEUFD3sMyXKEvQsjHXdMosBIUH33CaMuLi2rgEEvLGFSEYnGo5Bx9E1mtScikaAgPlxtToLyuLdz89+M9UN5xBSqTqF9RG55J5WQUd0nZhlRjo4GdMAsGCSqGSIb3DQEBAQOBjQAwgYkCgYEA7To/ZNHoIJzBUgY0734vsgl+ACxDQ+f4quvmSrPAtgDENSZwaVrHXpF+cRKBABqkDa00YcENx2dtS1tuHLKDNn1zMZLaZRpiK9UeiMPNZL6mlg12BWLwVjlFOGED8U6pfXwOw6D/FCDRgvyGBn7wsw8sEa7AdlYmMHGmkvwgOP0CAwEAAQ==";
 }';			}
+				// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
+
 			elseif(isset($data['ActivationRandomness'])) {
 				$AccountToken = '{
 	"InternationalMobileEquipmentIdentity" = "'.$data['InternationalMobileEquipmentIdentity'].'";
@@ -269,6 +295,10 @@ function actAlbert($activationinfo) {
 </dict>
 </plist>
 ';
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
+
 			$body1 = '<plist version="1.0">
 <dict>
 <key>iphone-activation</key>
@@ -295,6 +325,9 @@ function actAlbert($activationinfo) {
 </plist>
 ';
 
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
 
 $body2 = '<plist version="1.0">
 <dict>
@@ -318,6 +351,9 @@ $body2 = '<plist version="1.0">
 </dict>
 </plist>
 ';
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
 
 		}
 		file_put_contents('./var/www/requests/'.$data['SerialNumber'].'-'.$data['DeviceClass'].'-'.$data['RegionCode'].'-'.$data['ProductVersion'].'-Token.txt', "After: ".$AccountToken."\n", FILE_APPEND);
@@ -361,6 +397,9 @@ $body2 = '<plist version="1.0">
 	} else {
 		$body = str_replace('<key>unbrick</key><true/>','<key>unbrick</key><true/><key>show-settings</key><true/>', $body);
 	}
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
 
 	header("Content-Length: " . strlen($body));
 	echo $body;
@@ -392,6 +431,10 @@ $body2 = '<plist version="1.0">
 	\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n");
 	fclose($fh);
 }
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
+
 function AccountTokenCertificateTest() {
 	return base64_encode('-----BEGIN CERTIFICATE-----
 MIIDZzCCAk+gAwIBAgIBAjANBgkqhkiG9w0BAQUFADB5MQswCQYDVQQGEwJVUzET
@@ -415,6 +458,10 @@ LY7UKoTIKW6lTq3qIODuXni5tU20byauhiWmkG3fIrUnugnTMYScGy/RZVRA8EUh
 MnMhAMuMgJPdff8=
 -----END CERTIFICATE-----');
 }
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
+
 function PrivateKeyRaptor() {
 	return '-----BEGIN PRIVATE KEY-----
 MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAMZjRllRxHIk6I+/
@@ -434,6 +481,10 @@ DFe8zJ24EvRssw==
 -----END PRIVATE KEY-----
 ';
 }
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
+
 //////////////////////////////////////////////////////////////////////////////////////////
 function ActivationRecordXML($xml){
 	if (strpos($xml, 'AccountTokenCertificate') == false) return 'Activation Error 512';
@@ -494,6 +545,10 @@ function ActivationRequestInfoXMLNew($xml, $full=0) { $i=0;
 	$result = call_user_func_array('array_merge', $narr);
 	return $result;
 }
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
+
 function drmHandshake() {
 	$IngestBody = '{"serial-number":"C7JP52A5G5MW","productType":"iPhone7,2","imei":"358362069398446","os-version":"12.4","udid":"913ba72a0981d3352bf28ca98b3a4a856fe81959","meid":"35836206939844","scrt-part2":"MIIC+AIBAjCCAvEEIP4C3sqQtP1S2hwBZzCoHcsoH2xNu5c+a4Q45oJ1MKF3BEEE+E8J1160TWEw+lfR04Ep4n5V6qphBM7+C84Oq2EtbZ4f\/2ynq\/79kqJL9s+UfFf0xcRRBxh\/CsMO3not\/wt2KAQQD4ftZj1bi82CSQSJC2TW1QQQZr3iCHFkqBfBvzBJuUoXQQSCAmTHY10JozST1xlC8729SUd6BtPQdoVxWqn+VkRXimgLwI0oMHaE2XYy66zF+LpxNYspPwsTDwtirgK2+VKrTyq9sYRuz07FgWqPQ6QvsVPnWhWkEe4rQjoTxCySfkbJmLSyIsNZPY0KQdLJOWL76ybC3BFEU5YCQ0IeDDZZWlNNaINXwHpUKhg1lo+t1i888mBgIDqrmvJsdj+OyGOxEPdVetMuhV3x3nfaqqGbw\/xqhT3Pk206z11GcOCpkQv6WjRaxoHdZBOHUfDjPJeyalA0DHdGGlh+vu8vVmO5UxfxmjZ3bTTdIil0YjS+MeY\/6bBgp02LxgDByg3xoUPZ52ZAYi+un3zpn6zTBZBlVSkUP7ijqMtuUWbCKg5dwGJ\/b\/Mgnu9Tcn5XaUNWGilcgTE+p86OxzyMmOJYSP1LJM6beoZ9E3xIW6MQRcOvE6La3SaYdm7JcBcWmuvQT3opOf3\/wYOAPtTpMkzbL5WdXVdRU35tOF5OsSQZqcLDG\/novPZXqwL4ZYr1BA5CezxNAJYp6ti3N9hnwVxqVdOOlbbrrw+qHskntvgy3eSUph9oZua6721hxngFA+gEOVvHlSNV5cQ6i6vQ9BCb\/zRYYZVa9cZzx+3telmWWr6Y6DGqqPpP0Py1d2GY8dreh+HRRHAoq7oyYcCK82Jl4\/nktMcg4TyCRCdWFm5xzl0xKyD41a0gOfa3WK51py\/tIrZMkZvs5Xb29sdIr7E50Ow7B73tR5qXmCUuWXOloYlxmn3DitRNjLuLmesGYEl9m3MXgCkQhDP98asvIApiZAoDfKz+EAapWK8=","pcrt":"BAAAFNAm6jp\/RYdQSXbscM5nZ61j+TIJo13nlOpvSw\/KrQd4PnR87hzuLx63xMK5XykZZcmxLtD8iYHIpOg0X3ztfbKtWD5BDp5Sm6T2w7c7sdw4vXWfiASb\/WNhYyjAc6\/fAm4GUNQNMKFJYAfZr1v4+UphQ81vggC8cdiAwq30L8YrsTW6Ay\/HP\/45xjceRCTu1JNbnB8asWgfOZ953\/k0lXw9lYUg0KBInzIZAT0xqLMVt\/knHzECcuU\/l8oFM\/vX97QHUSiSh8P6o5n7SAqb7ZAhODCl+UROwsJS1uzR4Ir1SoUNUTA4L8c4LhBbMPd4bJHyUKLGt\/aW4qJMBJiYfSCW+kPqz62kWxN50yUsgWu9VENTPWAmh\/LxCP1SYIrvWbQ8ZIkAB5FrUMNb2jcp+t43zKYikSQ7k5uO\/IcDprcrwfF7M\/K07G0nCG0KNfv4+pbiaPG2bbVEV5rT70koiH2SCBuQlRtRXk1H+8Ej7\/MNxBwsPoCTQkyt5CVj4PISz3\/mxlSkSne6oY6QhXZMo09bkUdXnydUBZZnqkfGMDML1hLoco14RMUF43Kvl9QpgR5OVaUJGzT3q4mQtAO5Mx1a0L272vFxF6jUz6Y3b1o9Np1VBfK1ZnS1RdJcCC+vRW1q6qzp9CerIj8JvQrfzU3Pu\/JOvDvErs8DP29XTNKdO9VIhYPhRlVUjsQ99JRlOYTPiIXCzRxuIEzMrsKDoCA8khVGHOEYI\/rUCNHK9EE5pxUSct\/VizYxhZgJ6OWEDuRbOLqcsd4aPTxiIgJIbxpxwPBoIX30k7gj3PqcguUKsBNcZ5g5BBHJB69XkVDvQrojctwP41IkLE0NGXIx3er0le9yFcxRGqAHhelwlMMEGGAmmN9T764NEbloal9LcAGn\/bbDMP1r6RtAiM1lkTEF0nYOcxA61E5b7XJy+G0C2CtaB0rUvpIiczepddTux9uI67cF50CfOq4\/\/+I+iBo6yw9wvJNEKtN2vVGjNG7x51p+F4XTl2mzdjqwTkb+Swws6DQImAVUgFmB9kwoKrrlvaVxQUrJQk2S0Mai7xhs6rKjIgnHrDNGGcY9HYrNAgRBCkckRtdB6DumJqHVX1+uTSclIsfAmS9H06tIRkEHk75KxukMs1t\/iSyXfYAFe3rWf8121+ym4GFZZTvVSL8hYS1fK17bdBs8BS\/Ma4+KDdAP9O22tGXFZ9YdVi27LtihGMqRA6H8R\/M\/\/Owkm\/esJwHZnWdi0a\/FLGjGyKkZuGCjw92XRwav5Ufss9bG3UfZtTyyQ9bPO0PcjBt9LdXeh+LJaQ0lWiw7K\/UgYraEWyMRrrynquJi2NnY9PhZJl4ElfXjy\/dc5J2OuoWusxf\/3in2cKHKLfNPZN591Y7gWAXmpHAhjOWR9PSdtwltb9RDN8vLdtqV7dBk\/uksS2MeWuLOnG2ceMqjYSwa95YQQdus9KU3aYxEkx9z+jgiKYXjTtGQBWCHE3PyIHd93tCxILbW1pQVz5v8H78F2mtJS129Kd4ska3Q\/58tqtGmQBUiUzYVUT7nyvZtbK27ovFmU1XDw2Uk48dDh03so3ZpnXTLuqFEEVT69dmen2JzEFCI0jKUJsWsieq7KWmsMUFriO5PFnqsSxEpOGr2j9b66xFPxBXazezeDUSTeTCXgacBsSb9IMI1D0uW6rWfZzp5HC0axGt5OnrsQ7R\/CVVqTgcB4xSLwpXrzuQAEfiWt7+cuDmhxctBPlNRBMh05Ro6+aR36jyIqmw84IbYP1wABdI4ej0j9reLY0fV5Pv1KH05QvuwegajtAZwm0L2RBUXPi63vKyy5Dww0keSC1kPYCAXlcP7Fj2bkEykXYXKBgTj72kx2ybI44E336u4hQgF6tBurdAcqCYlh3tPMWQI54r+gu5X74hgigA+s5J5cObPgqi9KSKaaybRaot4VO56CGyQ2ZlYnRq21j+ZL8vMcJxcpTCwsYCmdwa0u27lEiz2nRFjz5YQfMOYeSz6WCJI95SiLbNOjz1FcwjgvYrXzPFBFCNEVlJ9y2DrBJSyPHyZFbTDDIm4ZyBIE\/y6895rkSpZpUTfjl3VEYeSKDDy9tZKVTzIRt3XgXVF6BtrYmBA7Iqvgb1ddJrcOMSp6HIcvJTHzLfvTWCGxkZYcd86A2aBSCnQYvFydOxXsSKt3cKP4MnQ7tga1kMNoN0bbewavoL3J49V4cDeeyVSEJ87eGU6m1bwCS3Cf3ld\/IfH+a8B0tzIiMpH9Ym+dBxSlFCuNc51+GExSBnD1xZR8JNX0pX7TKm03PC8edKRd5MunuvprQ1C9ocYpZZhNPIQNfE49IPgSvVSgLgHzPBey8BJjsBvYeYrH43pGOnUFbae66sI3UTmAVO1PW0KXTAN34bec2cbkb6SZPiC57\/oYDGw+7JYBL+shfp8MQDOQV3HCG69jY0NsZKcWe0XnFpNw4MLJeczYsmWgHvsQ1zvC3l1SvxjFoYBwsOMiG8VQC6bcCjJZJdTde\/Gh1b9mzzQuXkgGdICeopllBraP7Q8HJpwEmPhyKW7Y4AtXdDh310CU6uRmLnDAz\/PVboDONGfgYTBqbOUI9W1pmJpgn42dT0itGbJit9inLUGPmZ5KKuO2d8uNC5sdvPSbxtVFjIX9sMBYsz+jSs5v\/UYqSRnyoA5rbJxpSuBBxbXBAskJ48ltoNlno2V0OCExvYmTB7Vb5eZa6lIe0ERpkO9PTuc6fvw3g4UHxrWFYF5a3aL5OYFcrrLn7O56ulMWmWvT2pVSTK8ZkxNcl\/A+WYkZ6ZDLURtOQSFoaQCTWc2AkYRs9XZxxpyIjqZOln4R0isWjIcxv9TVleh0OxoRaj83IOc6tTOJ+Zvg6aD25ZWvCzz0OkVtSPWaQ\/WZVFeIJfmyG0FGcT20xn5tlF\/VgHJ4o1GteWnAuvCUEURfAEFn2rzlZ5CjbyarpqpnDq\/V4JAwY1owp7apE8qrMAyACXW4EoqIBNwgWzYol1buH+55S4xkrw9PSI2c6UC71Oe4zSWfy8x2ij\/EZjtP8SL9Mz\/6aZSIw27vUYy3n6utLcHkl7aQV3zefUmK8+\/55yYcM+8Vxbh\/XORGcLobFPZV3DX1jj+cmUXTOMMJmRbBhlp4PxJvUtfFB7VLZejT\/+NUp\/2ZAfcquttednGC2D4nXPjeSY5and5wnPNVCriPA40X8NTk3MZI\/xu8t\/ILP35MKh83SuoWeK+ljsvVCshrh2VhOrk4G5nuhg0ewnFjzyjtqfwLj5BsPcB4vXfEHvm7FP0K2TzWYKiqnNxxiDU7BStvQTF3sKKIxfS7GNgcCedS\/pNmsEdd0c0YQJrZrA10cSAyB8SlSeUu3M42E2W\/\/7WSv1V5+ugPfJhLnkyPCuT+v7n4argKxbH387KJMNsfn4Wn1b6cudv+DaFhW\/VVS1rF\/h+i0snv3jess5r2gyxWn4mI2lVfOsRq88kOBdPtkI1+Y866TwOcFq202aMYUs1vwu9Bcv\/MxQ1d\/KQD1tzz0ECW5+GFYaBV6MPPZPG1o1N+UmEUx35SQpMa624r+lxHQFfacBln8VqqFqHxEqfpIuNF\/QmjKi\/CulpWWfeFo6qT0xF55n6Zlgh5d8AcDsfsKcxdqDXkskEHQThIe8bN73m1gwe45b2gBl77fnIbz3Nd15dx3uECFuUqyBx3CJTR8yzne0YC6o\/pa1Itv8O2gxxr40IJPj2ar2WE2EyOgWwCUEClAY5DzbBQ80Shg6EHARJMjzkgaG3gcnZe8g9VsVJ7OL69ofAMwdqcglfBv3pLl14iqsfmix5r037T5syDqhW\/\/SZqQBP6PJS7FTwDs1JfI+FUT3EtG28cT8K2ztGXTvqV\/X82oG+Fd7YTJbnxExFhrVa+Lfzaf7HMQ+RACtqSm\/rzSKMaqfFkJ\/iNDPK9nscF+cOdZ\/PackeG4CpzAVIyDr5xHWA9qUdo8f43MIpc5pt94ZIZoYpGCeF53lmsYdyF\/2LqWwRLS41nRCyniDqfCiQAz0IWsOH96PM0WsTMz6dC3AvhQTsBGeeTNSqheGylBRskEAodDmC7HR+iOiFrjksfhI4DDHN2DaSVmNpTbbgp4szfy7ussre2\/WIoPuJLzy9PTRKE7Sh0NS3VxQ\/Ctla5bBWrGWzPQO8MqVxF0ggfFYjgRV4lhuIdofccgrwnIax1NqPTu95WoZERXy942UJFvMfuY9OgGbE1UEeIdEbsfRJIZ9zsjIYB5\/XWYwClJ27NGl3lHQYVFShIGyc0r5aYLIOU5wv88vWL7ed4uO1PXTfr+WYTK5RYODuTH4tz4fY1NzvsXKOBvvOdG8EG\/h7w08F71nq\/PAcNlUJKrmmGTrJvtJCCDmKrtv9VTORU+J7mMiFXpbDcH+AmDA\/63MWOIZvvLSHwkJT2DGYliHNcUZZ\/8a1S\/OpBSrgRy1olDqRJr06KL47iVTP45p\/1gIDg09j7HSe8XLWiQffhisPN7LvsgmKhHz0OUeOA9crQ8Ub7147ReiCxfJ8CJOt5MKrdzMspDvqwIgFf2Fbw2iSE98SG23e1ObUUHPQ36v3JnStCyqVwiaHd45lCga\/7ULkiBLkEd6rfarguCmnIcBVcdmWS6nlMBDWEZ1TvnseFjqt6Rw86sAUKGP2iuoEygcHknLmeWjkHUdMRNfWbdzKBXU9tV2Rr2yILy7ZY\/wfcIiDI0CuZO1\/qGpdYycrbi12EWJBmrfG9\/07RjLt+392c818bSKZmHEYFSsAcypK26LiRRf96RXEeyVhu\/GUGjZjMjCvdpvBpcNs+CO9VTzbfGOSOCrfvJ+G3HwLPSMQPuns+XR1cm6ql0LeJGgJl96IjwuJ8IAqtpWHKPTgMfo50i6BOW5cq7lo\/QER7lpadCDW67b35PxE++VghzyzZD71uoZ\/cqwe++bhKTC1dGxZvYLwPDR0BZiK6t0\/8jlLPmNoXa6Q9uhf2cr92AzpeJ+BposfuWv2nD+qJvhlUHYoR25tdqRJWQfixVpiaxXMEmc4OetTtQKahveifuH5J35TfQCq6IBDsREIYTX6jKB54OvlZCYKttZQrVNnV5Q8sBDMeWE4Dmtq4aCKp5Xl1kISbs2sAbWZearjd\/1f8p4Ux7AQKcXOJ52IzityWVZdyP31rNPn0gSpHmDmbqiTf+lfGPRQ\/Lugla1og8YR22wBNmJKSHjc5PgoI6AmskkZageTQcZFqqmOrus\/fm8sN4PjuypnEZfiyT8YN\/Ym6R2Jv8tS4AqUZz1TaNfnucpkxzG1yE66M9AdvsOtGanOmF0uxtsCN\/PPpSDHXRdyYqTsGqLMGtXw+frccl4dzQ0jnkWU+d7ERFJZ6GtTV7olGzXm\/lckfR3\/WZmcjkCthPtt7XKD3hlzmentZp4EN\/wSq4ZCkdSThI12A4ley5GZV9xRLuC5JPuIj4gHJRBTVef6fYTyu3VhwiJuPjKQMk9DArwPSDW0ITK4qRDURyO9Kp4cYAI7gzKSoFdIoSF6BDDT4MO6pzxB\/3h5txQPrXOJrRmW\/2JirXumGWTxp\/oyxbZ1P9R\/32HBQyr1xPSGAOPC8nJZQRpMU5tk+AG7r5QhOmFNcWpxXMqMgKSceGf81pNrRuWO5bKOxUmUkHVb4VAGhkkApgNu87qH2YPi3x7u4nLsIH39N95g0iLgepr\/zRcqitnznznZopy2c9BbhX5XpM8Dpwodt1etrmTBKDCG1z13KO5ufamn1GkrFi2PnLihT5Ui7wdADU4noPxRggAYSAouuh+asv8RA3Kiyuj590pZg0uveWSWXK9hn3aACfxrDtz5qPbfz1rUDgXPubSZ\/y\/xYI1OK7Y6cVVfX6OyQxlTOiHdJ1Qh8WPBuGtnVl64h0HMQHG6KDG8ophhtMPMvk3IyL+sD\/tLRTl1iNbz2vLzv+tJ3+nwc1DGM3HGgOCl1VxiBztCl11AioWTw6QVFhwtOVu7AlnAkWpBuz0sJ5Wo04OdsCekjxw53hjflZZNdNYlKSspuIZtaa7kj2VkE8UJnAJrVqpwurdSo6AxG00qlZ0PmPbkDnvMVbsa2Ur7EQy9CS415ZAQ+MgU+Bfm1OOiCuFiv9+jgX7r6LM6IA3NuXzsgkN\/cuYxWSAoFuZolaiS8mHHLCtBp6s8kOfVkBLRSJCfpQk4m\/s7OQRgHqWTlD0PmCKIsFOJ8kZIWYu7UWznuxFw3q7shH7DV+34CQKWhPeJVGxUkXH4Nk00n2n23s+EUDbhkBjxvHz76e8kvcTFtInVscWMo6\/Gs5+w9nQ0FWYP0ErUCd1WZyP\/wlBlnRo8slyUXS1dthlogog+nF1LIXxujE\/VaeE3xw7MXE\/d55lzK2HsBF6uKinKtyxD6tRpWFD3DfR6im0fsPmjyLZfXHI5fFZDiI70ndQsn8+XBbPKV\/dg4ayibJxrMyGCm3E4KfKHEJAZxLThUasmHXMWTy+ec6pBtRprie8pF9U+wNZT0Fdmuh88X+PFRm1AVAW8\/4izXESTFdMmcJYqbU0Z9\/r+12URLu+kJF0SVL0hSrGYAED5Qf2XMMrQxcA6MZLktJ268GzAYjh5oRKctIvwxaih7cYm6\/0mWyMk2KfjpSgrIPGRbbjQFlNpuuVLQCMFn2rr5yJuZ1W182irFGXv\/9UvEqXbVcgD9hSuFzEbNrTnU4UqiQA9In2AY\/rmYSN8tV6atM13qzjHcA+5v6fcuHe2uAXABFNc3wXZqkfQ67uoq1GkhMdyKE3VixLjGShuX5erErLaiIRne7pIMA0FjKg2mHyE7jvGNsDi2hsoDNhIZ+L1djnIts1416pWoVaOnsU5A2KgSSKz0tEoBq8WGtetE9SZLmgGQZHZaEAnStM5Z2NaTdi\/ZeepHbhwPtUKrV+vX6c1ie4AaPdK\/bZgfrlVdAKeXsQJWIpU\/QbB2L4EimLSE\/BS+O66DuMSnBq0+u5ih6oFvxMK4o8aaOw98Qbh7bTg84C9mz4u9X0i02KIngizIE9zKIK5zLquNmdMInZYQ5ziCD8guKHzijAeeCIxAyK08fUCpcFUJzVReOQmozpbJW3obKMdcxre4izJGUnb03UrDcmLITl1dVRgS2nzekNff4UNfeZ94kU=","scrt-part1":"MIIQigIBAjCCEIMEIP4C3sqQtP1S2hwBZzCoHcsoH2xNu5c+a4Q45oJ1MKF3BEEEyYGBwEdZ1FlUNP3W8hiN0MFhc\/RzAy\/J3m8d7gudcaWNlAOxJsTTBy3FAcaFNMxaInRUnna5QlBnr+W3QKba3wQQAEk2du7wBtgY3A3R39PeBAQQ20Vn0Orgd\/ht3UVuYajKPwSCD\/b7dsJlW7+mcSBD2kaQk\/EzsIgRlnYdxSAQkkxgqJlLNZpyT9HXaxEUXbhCbkXgh4ikojvrkkFcg0F6RJHH5csYdZ0H\/eoNqgwnpCgtuTWWDi9MER9i9hKaEewTpSqvxVrWJtVQ7uVlTvSbdMhX+CcL4HUk4veDeC5K4bTsEXs0lv9dsxkadWE0z4q4vLryzDPF89GCd7OaKKh\/f\/q0u+Ib2buotugbA5AeuYY6l9gixgGRy9GxAhSlXpxDrjfAWB2JalqKaCrAo5arkaNGXCXe+AZFEVUzTl\/\/9wbnFrS7RA2rDeN+fc\/88Zz57YP1Snb5ZTWRvnEgSBheDQouEL7dhB51TJ1MAdSu2pl9fYSqOtnjVr7Wvkxv3gdSx+rAYNuK\/KZngZ9T1WVpGUcQ2zFkQYbxuQqIq6GqMirqn7SAW7bDS2OKh1BC+KeGBSBSphWKpgRBB40o0iCJmE2XnEw8aJWvo\/eJIqXt5x1\/\/xdP2PXdZaUYHs7B3xU\/A2Euw66u8f9kZHscXaaK0sr87nqnIXoogsceBvuJqAeuxKuOLXB2NefR+c5ucETNMIALQr8FXkEYd7\/dC4JyarQWIIHDTrHY6wleKxk7v4HMGSyvPJorX3XP+IZT6y0j3O+yhB8qaxzw35qyyzwUV2UQu2HuDbXJlXpW2J06fjvFFVi2Hq\/2SAcP8r7aICHVzWX\/j2Z38Q\/qyT+nzrAf82O6WpbK9QgIjy6Y2I++bVYkYrRRQjWNBrfJzhiZJ13HbxRAVQjraAhlXxWzaYBtxlqd\/o1CKu+\/9knjEoyvRYyFAVZtBuWFtJ05JNBx3qmjFEQYSe96d63QKg3oAvKn4v4Vcm5w+xnM\/vUaxtveZV0EXZPJ5bgzlyrl9OZw2qvszv1qyOY2rG3H7e9h5EXTUGv8QDlr\/bb6GYEfwp2MDe4BzN4Oi5cOlzQWh9E8mmHvCuT2QFg2gdXR0eXFnVHsNCP6Qo9PpCJZmDRNZT+IjKLXUsb1Ova5kvk1HV3zy\/V4oDCWT2vxEZ5blTJNT8BmCfGYSQo2XTF0gL0jNP3kEzttkTPe50HupVZjt3ZRRITTbpxFYCNNidykr81nBRv12OWq2tX1eKSleTUlrVNoMiYTBVM9P6jNQ6\/jdrJLns07IfBg8ohCtOJ0tYN4OgC6Te3V9dT6LtLdfIAfqrRJOO5cRyMB7zUGCXMe0339KuksjJU\/\/1JAwzNPMFrlWJCV1enqMmuwJqlv8FsGkGaZdY6kpkWPIW56ldLtJtFs4vKKUP6BHql1OEHvgQBpa7Y0qRzI6r4SSWtkXxqHAKxqOGjYPF0rzVy4HxOVpy86ZOXPcwLd4\/5hFNLoJxQFzASb2ugfDmr7oZ03MMBWc2Vh4tJ5jTdZxTnZvivHuBe92H0fgR2aoMCEhCB9V6TJCslWenvfG6raZQrN6xJFu0ZNyYOCs80awB7K7dKJKHJIWepuAhcLDBxwzOli9ggwK5z46Pjsvpa0WlhyKtY1VMiADpGEvJU9Zp6\/iqzdlvlF+zP4CGNucb1B9yOlOOW+yWgwZnlaFe9aVkXz06lP0M0wWg\/Yg80z\/35JZXtya2zMg6uakjChgOCYLNfSJPKyUlNa1SUTt5zhSaOlBgVIsx61pQ1eVoSj++Kn0JnCaRPtboBeBQ44zHwzEdIi6QWuIeqiKxP9mw0srXfUs4FSzLddAaAWA8ec3A0\/VYTU5pllAl\/FjgdglzNO3AicXHcweZhyhP7fBvtQbMt45zCpRE3EcYelbrJ+pTLMDhObWel1XtpxdBEY\/4aq6f4UyGW898BOefthE1DpkrKs6DZj7nuY+Xp4P1boahp9fKk1hwyboCOc0Wnxha2wDsMigSYJrwyp31\/Jr249\/k5cZyybMzpPXdPKs99cSLfwDOIpv6iYdQHWJTxUxDSfVFnkrnZoho8P76vn4ouCniLRhkKwe10hfYXt8ZBDhydUtf097Rpx7MZKJ47nhKRPnvxQv\/IgEHSLODi5fOSYdD3GysbagiiCNLnG2N+NauqwMKFglgQZarC+bpBxp9NBXlOiPLOSkBSwexXmmn5XupIUN\/T72cZoFxZSpfD67QTw6iFkLyRzbK0vztsJHdIGp1Kv0y40Lb70\/8fE88Blg3PlMWVZoGJ0+P5JEzypontu5AC2itOtwkjTiaE7cYZxpxdL0DJkLoCScZ7+UM6zvp32vk173t10wvPKguZPNq7qAVoz1oLuqeTtpbvrX1LoXQwML6S+hmxiZaSSH35voIH0tsfSDga1GCNtFtF2I1xDKMb\/jwWDqlw7ue3WnTZl51p1MQz4+PVC69\/MbvbdT7y+DNmN4wybRC8sRmVzNnreVIa6y\/1y2dIbk3B\/datWnNEieRGDFF6rWyw\/6bPlgWNGwWGR+9xuXmI6nmZ+gVe9Q7Vx2Xvi5mrkX4BUpl8mvOjKN9TI\/UtlufIvWXgj9INmLyeC2H5775uIKpOE229QiaPpDhtlP\/hbxJakfZbIn9YS3v+29YaNGWebKQGADeXFtyVautFmvBhXrh8raQkbt0S09TXNr52BdqlpPhp7RgnTvXsB2yuU1kdsRxH2dDMkP8B2+Gxm7t7Cfq4W5xs4JJu5W814E5UdqbJApR7mZF1jQ9nETmyBmLMsycda81yxdSFMMiCkmtKdyCxkK0vP7+xbd5UmYodigsPxTIpP6Uixv3ep0rQ0clK3\/FYzZhKJm2aY+mxvkTBjONcE71YjdGnztEERhjFqTMOedtE4lPDf4L8pRoudDmb8K5SJtskT2yUGLYbnf0jvDlvnTD9AvmiIluVL2c9Oy6FiOqN8aBqxQxkMJfMA+7Jysp\/q6wG7SPWJhQp2CNgjFEnNVV3I1slylvlN0jdEeQOndisx7xXoxoVcvdxYSZScgQX2k5Ei13yqWI+p2yYLS9kj1vE7nioe+qo7OMFbkj8WwyDBgIiNyp\/aINA2j52XaasxNSQUy8UMDXU04UwVdvLJesJzrQ++bygy74ryPCJlk1xZ3yJ+yX5OhGHyEh0t0\/w1ZqJLb4ZcTXwlLFpXz\/cUVwoRHPXfM5bKUnva6lQlfNReo0wpCwMUlSk8pP4h5X1kOxaZu9qHwSVF7KiihBSF35Q3MDDsmHJH46Uhk4wZblwTikUB+uPvHBmxEsO3NTgID5XH9v19eCX01cWCXd2zXmxLxxGtDrLLJWdruXHaP\/qUX6vH+ewg7um\/dNzBzruHQsSO+7rIMYVnoYrPNEu\/5IZNcCFmcaUmjjP3RE\/mpt7rfgPnEN38Iw6qhQSnEizkh1EpAt4SEv6Irdk8x8lzIsfODmlU3ATnaTeLrYrW25SRwYcjQ1T67X3bWYB+mVNLU6LCiZ1wmi\/Q4x8xL\/qh7LAiI1Tn7AvYdMHO22zpKywwMUQSg4nX4zJtLagIh9hAhott1alOQJeXXV77iMRi7PorPjCixfqR8rPWx6nU9HUtDvqVUgg7a1L1iL0MG3G9ToTe7Fswb1M5rEE4AOZDmq+Lxic9Hfqag2zMZWgyfU6RA1ZQcIFwhFTN\/W\/maT\/PCo26X\/+XrSzBO8Zt0QW9y3I3y5PG9Eo2YxvnOByjtPjC1ng9KQyOICUUnG71MQF8ZGpPbSrRgSYrBeCr2rGkE+iCvOJNPGadl42PgSpTtZYeyiD\/9+OA9MXNMHylFR9S4t9RKOk9\/vUFC0jL0Q98QtDWWr6+a0i4h5Lt823luW+EVb5ieb0uuqn5A7B3ber3LWbXIWXowpDR++UEAXdk7vSKCw4lIq+ONBgepkQ6mpxWPMFobE3QYDEsH9C\/VDTR4cftQnjQ\/9f2A7fyipnG4f4DzYE98bStPckaXrsLjSa+QzXMA8WeQ++Sve0JnOxkkrWG0myqdwaQSc1gCdnqjB31Q3e6EKUn0SV9r+nkBj+vO8BCoGDjK1iI0hg19i3fvdPF8UakaaXXIwSYr\/nyFxIH\/Pced2\/sSc1gnn7VuVoMx9WmvR3HnZaX0XtEmSAUP\/rnKcoHHXjnKT+Dv0+zeg4N\/SHQdE4qCSC8C7kOhn3rL+mtxgRikmB1fUt1fdHP3+fGLpXO3X3UDS2Kqo9ktYJA0UfQZzR50wYQgoCPfRoV3pdfqSJEm9lrtmJSse0kRXqOGKUe9RN\/E133J3V0HbP1q\/MRtKPdBI5jdu86LGhw+TjkEDaWpZBPSSHLAKwF\/t8QxoUUcwN7gc+zhZ0z9q75P23yc41JpmJrpx1RRQnw2TKUuH7idxs7FbAxoa4n8qrNIL3JWBLt2aCDOUTUubJ3yARzWQPLoxiFs5GX1oVSYQSLhEAXUL3jOzUC79gCuV4W\/4L\/RMHpBHLye3qBLIxMombmMT9UYoc9jwmaDavoeyQ+tYegkA+crfwNS8AMMLjGGY\/wV7gtU4YZdSksajt\/QUrGlKIitRhXORPzF0icXovYbbgXwvVnt8GhMdbALgQoTbHBeaj848fpCSW6YFah6JUqLjEj\/E32QinXwQtwx+EYtglBiiFJwH74tM\/q74Wb1ezqB\/gpCRAZyaXuk8rgzTm+OB+PTI6ztXKaof0dNQwBhm1IzQJEI8iCCxQt\/NC42mG6vT+FVFSp4ROuTTV9GU7P5b6tWvH0hxQBcOF1p3rMUIDeNvoijLYBUV64ki\/uuDzic0a5G\/dlu5fYSVlADh1Ybc3c\/CU6CyMxJP1Nt03hE9Tw\/WVvgRfxYt6UZ5Q5XClgrOGgo7XD7VYWv\/DxiZUfsxEi2tKDIRLXuaxV+Kbb2DTWquSTh\/O55I0a8iCgNpviRyIUUZ8bUdwmGBHblHxw+FGhTxOsSlj7RqffzRH\/TatYgHTiaVQ2n0unb9wu0F2+NEgyJECAZegdPCPUT+85sPk7wSeUus\/hpWCkMmuEar5GwUAcOOD+EhmxS9xTgop4ZReHg8kaqp6OrxsrJHmaK0m1qg2fSUEW9Q\/qnmfbwaImDnkpLv45K8u78sV0vlObr7ArMVWSHtnYQ6YmkN3+nMwSh3LcpeiT1vIDUnDCyIYl6cxkQIUU9N8RcoaHz8GpGQhEOJOZ1U6Hjw4FSyxhOHCp5+Phpms7yTCjxzPw+gxwBOoU02\/C6fY9J2HKnYk2rYg3ugarI\/EcWC2E1H+XEt9xBSvL75fijhv7TP0PZ29ruU96SiP7a8QlHrg3Z\/zmsJZT8QrfWp2yyVj1LnPB3kXPgxOACjFDP5hyJopJNzjMnNV\/cyHcUrOhG66of4xEW8bq+EoH7RJKyCWxDf+65pPGQyYY09tIgF5j\/N5gWBbGQhVGBOWh1iymvBk9C0JqJ7NEC3pGgIh7J+qRXTyYdiZ7jhdCMvTZVvVJNi8D6Bt+g3f7TolBjPRt2VcFudBs47w5p8LMZ3EML7wDaQkgSDcS6u7SiPzn+85lqDoyomnec22K3RUxnEqzxMA6cT2pQIeUjhyVoRWE8TITFtCIIolpYOqxkkgduFyBM+GuBKY=","os-build":"16G77"}';
 	$CollectionBlob = '<?xml version="1.0" encoding="UTF-8"?>
@@ -592,6 +647,9 @@ iOswU20zKgFShviX80r32BeKQpI9QacU443NUw8UjwsEwEFRo01ggB2h78YjB6nr
 	<key>signActRequest</key>
 	<data>
 	eRqtvDpaCM0XNR19k8QFTQ==';
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
 
 	$request_ticket='<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -620,6 +678,10 @@ iOswU20zKgFShviX80r32BeKQpI9QacU443NUw8UjwsEwEFRo01ggB2h78YjB6nr
 ';
 	return($request_ticket);
 }
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
+
 function actAlbertTicket($activate) {
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
@@ -633,6 +695,9 @@ function actAlbertTicket($activate) {
 	curl_close ($ch);
 	return($albert);
 }
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
 
 function getHandShake() {
 	$json = json_encode($_POST, 1);
@@ -676,6 +741,9 @@ function get_client_ip() {
     else $ipaddress = 'UNKNOWN';
     return $ipaddress;
 }
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
 
 function boundary() {
     if (! isset($_SERVER['CONTENT_TYPE'])) return null;
@@ -683,6 +751,9 @@ function boundary() {
     if (empty($matches) || ! isset($matches[1])) return null;
     return $matches[1];
 }
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
 
 function ActivationRequestInfoXML($xml, $full=0) { $i=0;
 	$xml = simplexml_load_string($xml);
@@ -710,6 +781,9 @@ function ActivationRequestInfoXML($xml, $full=0) { $i=0;
 	$result = call_user_func_array('array_merge', $narr);
 	return $result;
 }
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
 
 if (!function_exists('getallheaders')) {
 	function getallheaders() {
@@ -722,6 +796,9 @@ if (!function_exists('getallheaders')) {
 		return $headers;
 	}
 }
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
 
 function AccountTokenCertificateApple() {
 	return base64_encode('-----BEGIN CERTIFICATE-----
@@ -747,3 +824,8 @@ J07+EHcmfGdpxwgO+7btW1pFar0ZjF9/jYKKnOYNyvCrwszhafbSYwzAG5EJoXFB
 -----END CERTIFICATE-----
 ');
 }
+
+// Made with ❤️ by @MoUnlocks
+// This code is not for sale, free for the community
+// Contact Us for collaboration: Telegram @MoUnlocks
+
